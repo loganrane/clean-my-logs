@@ -37,6 +37,31 @@ class Smithwaterman():
         i, j = 0, 0
 
         # Calculate identity, score, and aligned sequences
+        symbol = ''
+        found = 0
+        score = 0
+        identity = 0
+        for i in range(0, len(align1)):
+            # if two AAs are the same, then output the letter
+            if align1[i] == align2[i]:
+                symbol = symbol + align1[i]
+                identity = identity + 1
+                score += self._match_score(align1[i], align2[i])
+
+            # if they are not identical and none of them is gap
+            elif align1[i] != align2[i] and align1[i] is not None and align2[i] is not None:
+                score += self._match_score(align1[i], align2[i])
+                symbol += ' '
+                found = 0
+
+            # if one of them is a gap, output a space
+            elif align1[i] is None or align2[i] is None:
+                symbol += ' '
+                score += self._gap_penalty
+
+        identity = float(identity) / len(align1) * 100
+
+        return align1, align2
 
     def water(self, seq1, seq2):
         m, n = len(seq1), len(seq2)
