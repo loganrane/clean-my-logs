@@ -3,13 +3,13 @@ from .pattern_generator import PatternGenerator
 from .scorer import Scorer
 
 class Clusterer():
-    def __init__(self, k1, k2, delimeters='\\s', max_dist=0.15):
+    def __init__(self, k1=1, k2=0.5, delimeters='\\s', max_dist=0.30):
         self.k1 = k1
         self.k2 = k2
         self.delimeters = delimeters
         self.max_dist = max_dist
         self.pattern_generator = PatternGenerator()
-        self.scorer = Scorer()
+        self.scorer = Scorer(k1, k2)
 
         # List of all the clusters we get (for output)
         # [representative (generalised format), count (of that format)]
@@ -25,7 +25,7 @@ class Clusterer():
         found = False # Pattern found for this line
 
         for i in range(len(self.clusters)):
-            [rep, count] = self.cluster[i]
+            [rep, count] = self.clusters[i]
             
             score = self.scorer.distance(rep, tokens)
             if score <= self.max_dist:

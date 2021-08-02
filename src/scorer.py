@@ -6,12 +6,11 @@ class Scorer():
 
     def score(self, f1, f2):
         """Score the string based on their match"""
-        if(isinstance(f1, str) and isinstance(f2, str) and
-           f1 == f2):
+        if(isinstance(f1, str) and isinstance(f2, str) and f1 == f2):
             return self.k1
-        if(isinstance(f1, str) and isinstance(f2, str) and
-           f1 == self._placeholder and f2 == self._placeholder):
-            return self.f2
+        if(isinstance(f1, str) and isinstance(f2, str) and f1 == self._placeholder and f2 == self._placeholder):
+            return self.k2
+        return 0
 
     def distance(self, fields1, fields2):
         """Get distance between two lists of strings"""

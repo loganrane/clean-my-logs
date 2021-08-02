@@ -1,11 +1,19 @@
 import sys
-from smith_waterman import Smithwaterman
-from pattern_generator import PatternGenerator
+from .clusterer import Clusterer
 
-a, b = Smithwaterman().water("Apr 21, 2021 5:01:33 PM com.nirima.jenkins.plugins.docker.DockerContainerWatchdog loadNodeMap", 
-"Apr 21, 2021 5:06:33 PM com.nirima.jenkins.plugins.docker.DockerContainerWatchdog execute")
 
-print(''.join(PatternGenerator().create_pattern(a, b)))
+def run():
+    filename = input()
+    clusterer = Clusterer()
+    contents = []
+    with open(filename, 'r') as f:
+        for line in f:
+            clusterer.cluster(line)
+    
+    clusterer.clusters.sort(key = lambda x:-x[1])
+    for cl in clusterer.clusters:
+        print(cl[1], ' '.join(map(str, cl[0])))
 
-# print(''.join(a))
-# print(''.join(b))
+
+if __name__ == '__main__':
+    run()

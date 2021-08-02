@@ -1,4 +1,4 @@
-from smith_waterman import Smithwaterman
+from .smith_waterman import Smithwaterman
 
 class PatternGenerator():
     def __init__(self, placeholder='---'):
