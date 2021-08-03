@@ -27,5 +27,8 @@ setup (
         "Operating System :: OS Independent",
     ],
     python_requires=">=3.6",
-    scripts=['cleanlogs.py'],
+    entry_points = {
+    'console_scripts': [
+        'cleanlogs = src.run:run'
+    ],}
     )
