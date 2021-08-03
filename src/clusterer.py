@@ -3,6 +3,7 @@ from .pattern_generator import PatternGenerator
 from .scorer import Scorer
 from .preprocess_line import Preprocessor
 class Clusterer():
+    """Class to generate clusters of data"""
     def __init__(self, k1=1, k2=0.5, delimeters='\\s', max_dist=0.30):
         self.k1 = k1
         self.k2 = k2
@@ -16,7 +17,7 @@ class Clusterer():
         # [representative (generalised format), count (of that format)]
         self.clusters = []
     
-    def cluster(self, line):
+    def make_cluster(self, line):
         """Process each line one by one with all the existing clusters."""
         # Convert log data to keywords -> make a class to do comprehensive cleaning
         line = self.pre.preprocess(line)

@@ -1,6 +1,7 @@
 import re
 
 class Preprocessor():
+    """Preprocess some generalised formats."""
     def __init__(self):
         pass
 

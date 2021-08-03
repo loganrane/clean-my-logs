@@ -2,12 +2,14 @@ import argparse
 
 
 class Input():
+    """Class to take the input from command line
+    """
     def __init__(self):
         parser = argparse.ArgumentParser(
-            description='Clean Logs: A anamoly detection CLI tool'
+            description='Clean Logs: An anamoly detection CLI tool'
         )
 
-        parser.add_argumen(
+        parser.add_argument(
             'file',
             default='-',
             type=str,
@@ -18,21 +20,11 @@ class Input():
         parser.add_argument(
             '-m',
             '--max-dist',
-            default=0.55,
+            default=0.35,
             type=float,
             help="""
             This controls how granular cluster should be.
-            Lower value will generate more clusters. Default: 0.55
-            """
-        )
-
-        parser.add_argument(
-            '-p',
-            '--placeholder',
-            default='----',
-            type=str,
-            help="""
-            Use a custom string as placeholder in output. Default: ----
+            Lower value will generate more clusters. Default: 0.35
             """
         )
 
@@ -40,6 +32,7 @@ class Input():
             '-s',
             '--sorted',
             type=str,
+            default='asc',
             choices=['desc', 'asc'],
             help="""
             Sort the cluster on the count of members.

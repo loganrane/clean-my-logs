@@ -1,11 +1,14 @@
 from .smith_waterman import Smithwaterman
 
 class PatternGenerator():
-    def __init__(self, placeholder='---'):
+    """Class to generate pattern based on similarity.
+    Utilized Smith-Waterman Algorithm."""
+    def __init__(self, placeholder='----'):
         """Placeholder for similar texts"""
         self._placeholder = placeholder
     
     def create_pattern(self, target, representative):
+        """Create pattern for similar lines"""
         if len(target) == 0 and len(representative) == 0:
             return []
 

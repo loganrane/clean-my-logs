@@ -1,4 +1,5 @@
 class Scorer():
+    """Class to score two lines of data based on their similarity"""
     def __init__(self, k1, k2, placeholder='---'):
         self.k1 = k1  # k1 if x = y and both are strings
         self.k2 = k2  # k2 if both are placeholders
