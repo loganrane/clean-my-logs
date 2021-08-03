@@ -1,7 +1,7 @@
 import re
 from .pattern_generator import PatternGenerator
 from .scorer import Scorer
-
+from .preprocess_line import Preprocessor
 class Clusterer():
     def __init__(self, k1=1, k2=0.5, delimeters='\\s', max_dist=0.30):
         self.k1 = k1
@@ -10,6 +10,7 @@ class Clusterer():
         self.max_dist = max_dist
         self.pattern_generator = PatternGenerator()
         self.scorer = Scorer(k1, k2)
+        self.pre = Preprocessor()
 
         # List of all the clusters we get (for output)
         # [representative (generalised format), count (of that format)]
@@ -18,8 +19,7 @@ class Clusterer():
     def cluster(self, line):
         """Process each line one by one with all the existing clusters."""
         # Convert log data to keywords -> make a class to do comprehensive cleaning
-        line = re.sub(r'[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*' , '<ip>', line)
-        line = re.sub(r'^(\d{2}):(\d{2}):(\d{2}) ?([AaPp][Mm])$', '<time>', line) # converting only time as there are a lot of formats of date
+        line = self.pre.preprocess(line)
 
         tokens = re.split(self.delimeters, line.strip())
         found = False # Pattern found for this line

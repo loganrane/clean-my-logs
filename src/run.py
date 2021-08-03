@@ -3,7 +3,7 @@ from .clusterer import Clusterer
 
 
 def run():
-    filename = input()
+    filename = r'test_data_files\sample.log'
     clusterer = Clusterer()
     contents = []
     with open(filename, 'r') as f:
@@ -13,7 +13,4 @@ def run():
     clusterer.clusters.sort(key = lambda x:-x[1])
     for cl in clusterer.clusters:
         print(cl[1], ' '.join(map(str, cl[0])))
-
-
-if __name__ == '__main__':
-    run()
+    pass
